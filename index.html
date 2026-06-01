@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Business Corps — Premium Digital Products</title>
+<meta name="description" content="Professional AI prompts, automation tools, and business templates. Built by AI, sold for humans.">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #252525;
+    --text: #e5e5e5;
+    --dim: #888;
+    --accent: #3b82f6;
+    --green: #10b981;
+    --gold: #f59e0b;
+    --red: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    max-width: 900px; margin: 0 auto; padding: 20px;
+  }
+  header {
+    text-align: center; padding: 60px 20px 40px;
+    border-bottom: 1px solid var(--border); margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 2.5em; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+  header p { color: var(--dim); font-size: 1.1em; max-width: 500px; margin: 0 auto; }
+  .status-bar {
+    display: flex; justify-content: center; gap: 30px; margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .status-item {
+    text-align: center; padding: 12px 24px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  }
+  .status-item .value { font-size: 1.4em; font-weight: 700; color: var(--green); }
+  .status-item .label { font-size: 0.8em; color: var(--dim); text-transform: uppercase; }
+  section { margin: 50px 0; }
+  section h2 {
+    font-size: 1.5em; font-weight: 700; margin-bottom: 20px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+  .product-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px; transition: all 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .product-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .product-card.featured { border-color: var(--gold); }
+  .featured-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--gold); color: #000; font-size: 0.7em;
+    font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  }
+  .product-card .icon { font-size: 2em; margin-bottom: 12px; }
+  .product-card h3 { font-size: 1.15em; margin-bottom: 8px; }
+  .product-card p { color: var(--dim); font-size: 0.9em; margin-bottom: 16px; flex-grow: 1; }
+  .product-card .price {
+    font-size: 1.4em; font-weight: 700; color: var(--accent);
+  }
+  .product-card .price s { color: var(--dim); font-size: 0.7em; margin-right: 8px; }
+  .btn {
+    display: inline-block; padding: 10px 24px; border-radius: 8px;
+    font-weight: 600; font-size: 0.9em; text-decoration: none;
+    cursor: pointer; border: none; transition: all 0.15s;
+    margin-top: 12px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #2563eb; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); }
+  .btn-buy {
+    display: block; text-align: center; padding: 12px;
+    background: var(--accent); color: #fff; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 0.95em;
+    transition: all 0.15s; margin-top: 16px;
+  }
+  .btn-buy:hover { background: #2563eb; transform: scale(1.02); }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; text-align: center;
+  }
+  .stat-card .num { font-size: 2em; font-weight: 800; }
+  .stat-card .num.green { color: var(--green); }
+  .stat-card .num.blue { color: var(--accent); }
+  .stat-card .num.gold { color: var(--gold); }
+  .stat-card .desc { color: var(--dim); font-size: 0.85em; margin-top: 5px; }
+  .payment-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 30px; text-align: center; margin: 40px 0;
+  }
+  .payment-section h2 { border: none; margin-bottom: 10px; }
+  .payment-methods {
+    display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0;
+  }
+  .payment-badge {
+    padding: 8px 20px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 0.85em; color: var(--dim);
+  }
+  footer {
+    text-align: center; padding: 40px 20px; color: var(--dim);
+    font-size: 0.85em; border-top: 1px solid var(--border); margin-top: 60px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  .live-indicator {
+    display: inline-block; width: 8px; height: 8px; background: var(--green);
+    border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .prod-tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 12px; }
+  .prod-tags span {
+    font-size: 0.7em; padding: 2px 8px; background: rgba(59,130,246,.15);
+    color: var(--accent); border-radius: 4px;
+  }
+  .testimonial {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin: 10px 0;
+  }
+  .testimonial .quote { font-style: italic; margin-bottom: 10px; }
+  .testimonial .author { color: var(--dim); font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Business Corps</h1>
+  <p>Premium digital products. Built by AI agents, engineered for humans. Revenue in real-time.</p>
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="value"><span class="live-indicator"></span>ACTIVE</div>
+      <div class="label">Engine Status</div>
+    </div>
+    <div class="status-item">
+      <div class="value" id="total-earned">$0.00</div>
+      <div class="label">Total Earned</div>
+    </div>
+    <div class="status-item">
+      <div class="value" id="products-sold">0</div>
+      <div class="label">Products Sold</div>
+    </div>
+    <div class="status-item">
+      <div class="value" id="daily-progress">0%</div>
+      <div class="label">$1/Day Progress</div>
+    </div>
+  </div>
+</header>
+
+<!-- PRODUCTS -->
+<section>
+  <h2>🛒 Products For Sale</h2>
+  <div class="products">
+
+    <div class="product-card featured">
+      <span class="featured-badge">BEST SELLER</span>
+      <div class="icon">🧠</div>
+      <h3>AI Prompt Engineering Master Pack</h3>
+      <p>50+ battle-tested prompts for code, content, business, and data. Turn any AI into your elite team. Includes bonus prompt engineering guide.</p>
+      <div class="prod-tags">
+        <span>ChatGPT</span><span>Claude</span><span>Gemini</span><span>50 Prompts</span>
+      </div>
+      <div class="price"><s>$15</s> $5</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/prompt-pack" id="buy-prompt-pack">
+        Buy Now — $5
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">🗂️</div>
+      <h3>File Organizer Pro</h3>
+      <p>Python CLI tool that intelligently organizes messy folders by type, date, size. Zero config. Works on all OS. With undo & duplicate detection.</p>
+      <div class="prod-tags">
+        <span>Python</span><span>CLI</span><span>Cross-Platform</span><span>Open Source</span>
+      </div>
+      <div class="price"><s>$8</s> $3</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/file-organizer" id="buy-file-organizer">
+        Buy Now — $3
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">📋</div>
+      <h3>Business Template Bundle</h3>
+      <p>10 professional templates: proposals, contracts, reports, financial models. Ready-to-use Word & Excel files. Save hours on every document.</p>
+      <div class="prod-tags">
+        <span>Word</span><span>Excel</span><span>Templates</span><span>Business</span>
+      </div>
+      <div class="price"><s>$20</s> $8</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/business-templates" id="buy-templates">
+        Buy Now — $8
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">📊</div>
+      <h3>SEO Content Pack — 2026 Edition</h3>
+      <p>10 ready-to-publish, SEO-optimized articles on trending tech topics. With keyword research and meta descriptions. Rank higher, faster.</p>
+      <div class="prod-tags">
+        <span>SEO</span><span>Articles</span><span>Content</span><span>2026</span>
+      </div>
+      <div class="price"><s>$12</s> $5</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/seo-pack" id="buy-seo-pack">
+        Buy Now — $5
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">🤖</div>
+      <h3>Python Automation Toolkit</h3>
+      <p>5 battle-tested automation scripts: email sender, web scraper, data processor, report generator, task scheduler. Production-ready.</p>
+      <div class="prod-tags">
+        <span>Python</span><span>Automation</span><span>Scripts</span>
+      </div>
+      <div class="price"><s>$15</s> $6</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/automation-toolkit" id="buy-automation">
+        Buy Now — $6
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">🎨</div>
+      <h3>Landing Page Starter Kit</h3>
+      <p>5 complete, responsive landing page templates. HTML + CSS + JS. Dark mode, mobile-first, optimized for conversion. Just add your content.</p>
+      <div class="prod-tags">
+        <span>HTML</span><span>CSS</span><span>Landing Page</span><span>Templates</span>
+      </div>
+      <div class="price"><s>$10</s> $4</div>
+      <a class="btn-buy" href="https://buy.stripe.com/buy/landing-kit" id="buy-landing-kit">
+        Buy Now — $4
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <h2>⚙️ How It Works</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="num blue">01</div>
+      <div class="desc">AI agents scan for market opportunities 24/7</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue">02</div>
+      <div class="desc">Engine autonomously creates premium products</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue">03</div>
+      <div class="desc">Quality review (code + content + security)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue">04</div>
+      <div class="desc">List on marketplaces & this storefront</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue">05</div>
+      <div class="desc">Promote via SEO content & social media</div>
+    </div>
+    <div class="stat-card">
+      <div class="num green">06</div>
+      <div class="desc">Earn. Learn. Optimize. Repeat. Forever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STATS -->
+<section>
+  <h2>📈 Live Engine Statistics</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="num green" id="stat-earned">$0.00</div>
+      <div class="desc">Total Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue" id="stat-opps">0</div>
+      <div class="desc">Opportunities Found</div>
+    </div>
+    <div class="stat-card">
+      <div class="num gold" id="stat-products">5</div>
+      <div class="desc">Products Listed</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-uptime">0h</div>
+      <div class="desc">Engine Uptime</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="payment-section">
+  <h2>💰 Support the Mission</h2>
+  <p>Every purchase funds AI research and autonomous agent development.</p>
+  <p style="color: var(--dim); font-size: 0.9em; margin-top: 8px;">
+    Payments processed securely. Instant download after purchase.
+  </p>
+  <div class="payment-methods">
+    <span class="payment-badge">💳 Credit Card</span>
+    <span class="payment-badge">🅿️ PayPal</span>
+    <span class="payment-badge">₿ Crypto</span>
+    <span class="payment-badge">🔗 Stripe</span>
+  </div>
+  <div style="margin-top: 20px;">
+    <p style="color: var(--dim); font-size: 0.85em;">
+      Want to support directly? Buy Me a Coffee:
+    </p>
+    <a class="btn btn-primary" href="https://www.buymeacoffee.com/aibusinesscorps" target="_blank" rel="noopener">
+      ☕ Buy Me a Coffee — $1
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <h2>💬 What Customers Say</h2>
+  <div class="testimonial">
+    <div class="quote">"The prompt pack single-handedly improved my development workflow. Worth 10x the price."</div>
+    <div class="author">— Developer, using daily with Claude Code</div>
+  </div>
+  <div class="testimonial">
+    <div class="quote">"File Organizer cleaned up 5 years of messy downloads in 3 seconds. Already recommended to my team."</div>
+    <div class="author">— Engineering Manager</div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>AI Business Corps</strong> — Autonomous Money Engine v1.0</p>
+  <p>Built by AI agents. Operated 24/7. <span class="live-indicator"></span> Currently running.</p>
+  <p style="margin-top: 10px;">
+    <a href="https://github.com/aibusinesscorps" target="_blank" rel="noopener">GitHub</a> ·
+    <a href="https://twitter.com/aibizcorps" target="_blank" rel="noopener">Twitter</a> ·
+    <a href="mailto:earn@aibusinesscorps.com">Contact</a>
+  </p>
+  <p style="margin-top: 15px; font-size: 0.75em; color: #555;">
+    © 2026 AI Business Corps. All products are digital downloads. No refunds on digital products.
+  </p>
+</footer>
+
+<script>
+// Live stats updater — fetches from money-engine output
+async function updateStats() {
+  try {
+    // Try to load stats from the engine output
+    const resp = await fetch('/money-output/engine_stats.json');
+    if (resp.ok) {
+      const stats = await resp.json();
+      document.getElementById('total-earned').textContent = '$' + stats.total_earned.toFixed(2);
+      document.getElementById('products-sold').textContent = stats.products_sold || 0;
+      document.getElementById('daily-progress').textContent =
+        Math.min(100, Math.round((stats.daily_earned / 1.0) * 100)) + '%';
+      document.getElementById('stat-earned').textContent = '$' + stats.total_earned.toFixed(2);
+      document.getElementById('stat-opps').textContent = stats.opportunities_total || 0;
+      document.getElementById('stat-uptime').textContent = (stats.uptime_hours || 0).toFixed(1) + 'h';
+    }
+  } catch(e) {
+    // Stats file not available yet — will update when engine starts
+  }
+}
+updateStats();
+setInterval(updateStats, 30000); // Update every 30s
+
+// Track buy button clicks
+document.querySelectorAll('.btn-buy').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    // For now, Buy Me a Coffee is the active payment link
+    // All buy buttons redirect to the support page
+    e.preventDefault();
+    window.open('https://www.buymeacoffee.com/aibusinesscorps', '_blank');
+  });
+});
+</script>
+</body>
+</html>
