@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment — AI Business Corps</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --border: #252525;
+    --text: #e5e5e5; --dim: #888; --accent: #3b82f6; --green: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 40px; max-width: 500px; width: 100%; text-align: center;
+  }
+  h1 { font-size: 1.8em; margin-bottom: 10px; }
+  .price { font-size: 3em; font-weight: 800; color: var(--accent); margin: 20px 0; }
+  .desc { color: var(--dim); margin-bottom: 30px; }
+  .pay-btn {
+    display: block; width: 100%; padding: 16px; margin: 12px 0;
+    border-radius: 10px; font-size: 1.1em; font-weight: 700; text-decoration: none;
+    cursor: pointer; border: none; color: #fff; transition: all 0.15s;
+  }
+  .pay-btn.bmc { background: #ff813f; }
+  .pay-btn.bmc:hover { background: #e67338; }
+  .pay-btn.crypto { background: #627eea; }
+  .pay-btn.crypto:hover { background: #5570d9; }
+  .pay-btn.paypal { background: #0070ba; }
+  .pay-btn.paypal:hover { background: #005ea6; }
+  .crypto-address {
+    background: #000; border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; margin: 16px 0; font-family: monospace; font-size: 0.75em;
+    word-break: break-all; color: var(--green); display: none;
+  }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 0.75em; font-weight: 600; margin: 4px;
+  }
+  .badge.instant { background: rgba(16,185,129,.15); color: var(--green); }
+  .back { color: var(--dim); font-size: 0.85em; margin-top: 20px; display: block; }
+  .back:hover { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💰 Complete Your Purchase</h1>
+  <div class="price" id="price-display">$5</div>
+  <p class="desc" id="product-name">AI Prompt Engineering Master Pack</p>
+  <span class="badge instant">⚡ Instant Download</span>
+  <span class="badge instant">🔒 Secure Payment</span>
+
+  <a class="pay-btn bmc" href="https://www.buymeacoffee.com/aibusinesscorps" target="_blank">
+    ☕ Buy Me a Coffee
+  </a>
+
+  <button class="pay-btn crypto" onclick="showCrypto()">
+    ₿ Pay with Crypto
+  </button>
+  <div class="crypto-address" id="crypto-addr">
+    <p style="margin-bottom:8px;color:var(--dim)">Send to this address:</p>
+    <p id="wallet-addr">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</p>
+    <p style="margin-top:8px;color:var(--gold);font-size:0.8em">
+      After sending, email tx ID to earn@aibusinesscorps.com
+    </p>
+  </div>
+
+  <a class="pay-btn paypal" href="https://paypal.me/aibusinesscorps" target="_blank">
+    🅿️ PayPal
+  </a>
+
+  <a class="back" href="index.html">← Back to Store</a>
+</div>
+
+<script>
+  // Parse product from URL params
+  const params = new URLSearchParams(window.location.search);
+  const product = params.get('product') || 'AI Prompt Engineering Master Pack';
+  const price = params.get('price') || '5';
+  document.getElementById('product-name').textContent = product;
+  document.getElementById('price-display').textContent = '$' + price;
+
+  function showCrypto() {
+    document.getElementById('crypto-addr').style.display = 'block';
+  }
+</script>
+</body>
+</html>
