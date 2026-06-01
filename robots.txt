@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://godget-tech.github.io/aibusinesscorps-storefront/sitemap.xml
